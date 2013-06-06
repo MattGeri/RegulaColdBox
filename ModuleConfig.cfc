@@ -7,6 +7,11 @@
 	this.version			= "0.1";
 		
 	function configure() {
+		// custom settings
+		settings = {
+			regula_js_path = "/#appMapping#/modules/RegulaColdbox/includes/js/"
+		};
+		
 		conventions = {
 			pluginsLocation = "plugins"
 		};
