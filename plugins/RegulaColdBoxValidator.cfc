@@ -15,7 +15,10 @@
 				for (var rule in currentRules) {
 					switch (rule) {
 						case "required":
-							outputBuffer = "@Required" & getRuleMessageIfExists("requiredMessage", currentRules);
+							outputBuffer &= "@Required" & getRuleMessageIfExists("requiredMessage", currentRules) & " ";
+							break;
+						case "type":
+							outputBuffer &= getTypeRule(currentRules) & " ";
 							break;
 						case "size":
 							break;
@@ -38,19 +41,44 @@
 			}
 		}
 		
-		return outputBuffer;
+		return rtrim(outputBuffer);
 	}
 	
 	private function injectRegula() {
 		return "";
 	}
 	
-	private function getRuleMessageIfExists(required string ruleMessage, required struct ruleStruct) {
-		if (structKeyExists(ruleStruct, ruleMessage)) {
-			return "(message='" & ruleStruct[ruleMessage] & "')";
+	private function getRuleMessageIfExists(required string ruleMessage, required struct rulesStruct) {
+		if (structKeyExists(rulesStruct, ruleMessage)) {
+			return "(message='" & rulesStruct[ruleMessage] & "')";
 		}
 		
 		return "";
+	}
+	
+	private function getTypeRule(required struct rulesStruct) {
+		var typeOutputBuffer = "";
+		
+		switch(rulesStruct['type']) {
+			case "email":
+				typeOutputBuffer &= "@Email";
+				break;
+			case "alpha":
+				typeOutputBuffer &= "@Alpha";
+				break;
+			case "numeric":
+				typeOutputBuffer &= "@Numeric";
+				break;
+			case "integer":
+				typeOutputBuffer &= "@Integer";
+				break;
+		}
+		
+		if (len(typeOutputBuffer) > 0) {
+			typeOutputBuffer &= getRuleMessageIfExists("typeMessage", rulesStruct);
+		}
+		
+		return typeOutputBuffer;
 	}
 	
 }
