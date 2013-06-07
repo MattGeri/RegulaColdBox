@@ -14,8 +14,24 @@
 				
 				for (var rule in currentRules) {
 					switch (rule) {
-						case "REQUIRED":
+						case "required":
 							outputBuffer = "@Required" & getRuleMessageIfExists("requiredMessage", currentRules);
+							break;
+						case "size":
+							break;
+						case "range":
+							break;
+						case "regex":
+							break;
+						case "sameAs":
+							break;
+						case "sameAsNoCase":
+							break;
+						case "discrete":
+							break;
+						case "min":
+							break;
+						case "max":
 							break;
 					}
 				}
