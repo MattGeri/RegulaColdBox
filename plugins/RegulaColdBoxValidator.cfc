@@ -44,10 +44,6 @@
 		return rtrim(outputBuffer);
 	}
 	
-	private function injectRegula() {
-		return "";
-	}
-	
 	private function getRuleMessageIfExists(required string ruleMessage, required struct rulesStruct) {
 		if (structKeyExists(rulesStruct, ruleMessage)) {
 			return "(message='" & rulesStruct[ruleMessage] & "')";
